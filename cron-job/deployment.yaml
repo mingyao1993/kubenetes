@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cron-job
+spec:
+  schedule: "*/1 * * * *"  # Cron schedule in standard format (every minute)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: cron-job-container
+            image: cron-job-image:latest
+            imagePullPolicy: IfNotPresent # Only pull image from the internet if not available locally
